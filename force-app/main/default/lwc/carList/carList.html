@@ -1,0 +1,46 @@
+<template>
+    <lightning-card title="Cars" icon-name="custom:custom31">
+    <div class="slds-card__body_inner">
+        <!-- Start car list -->
+    <template if:true={Cars}>
+<lightning-input type="search"  onchange={handleSearchTermChange} 
+                                variant="label-hidden" class="slds-m-bottom_small"
+                                label="Search" placeholder="Search for Cars"
+                                value={searchTerm}>
+</lightning-input>
+            <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                <template for:each={Cars} for:item="Car">
+                    <lightning-layout-item key={Car.Id} size="3" class="slds-p-around_x-small">
+                        <!-- Start car tile -->   
+                        <lightning-card title={Car.Name} class="Car-tile">
+                            
+                            <div class="slds-p-horizontal_small">
+                                <div class="slds-media">
+                                    <div class="slds-media__figure">
+                                        <img src={Car.Image__c} alt="Car profile" width="100" height="100"/>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <p class="slds-m-bottom_xx-small">{Car.Brand_Name__c}</p>
+                                        <p class="slds-m-bottom_xx-small">{Car.Price__c}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                           <lightning-button class="slds-m-around_small" variant="brand" label="Add to Cart"></lightning-button>
+                        </lightning-card>
+                        <!-- End bear tile -->
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+                    <!-- No bears found -->
+                    <!-- End bear list -->
+                    <!-- Data failed to load -->
+                    <template if:true={error}>
+                    <div class="slds-text-color_error">
+                        An error occurred while loading the car list
+                    </div>
+                </template>
+        </template>
+    </div>
+</lightning-card>
+</template>
